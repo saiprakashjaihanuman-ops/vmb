@@ -152,7 +152,7 @@ function renderProductsByCategory(category) {
       ];
 
       div.innerHTML = `
-        <div class="discount-badge">20% OFF</div>
+        <div class="discount-badge">${product.discount || ""}</div>
         <img src="${product.image}" alt="${product.name}" />
         <h4>${product.name}</h4>
         <p>₹${product.price} - ${product.minQty===250?'250g':'100g'}</p>
