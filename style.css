@@ -68,16 +68,17 @@ header a:hover {
 .nav-links a:hover {
   color: #c8e6c9;
 }
+
 .discount-badge {
   position: absolute;
-  top: 20px;
-  left: -40px;
-  background: #ff4c4c;
-  color: white;
-  padding: 5px 50px;
-  transform: rotate(-45deg);
-  font-size: 12px;
-  font-weight: 600;
+  top: 10px;
+  right: 10px;
+  background: #28a745;
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 10px 12px;
+  border-radius: 50%;
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   z-index: 2;
 }
