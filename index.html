@@ -1,631 +1,152 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Millet Bites — Healthy Millet Snacks</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Millet Bites — Healthy, tasty & affordable millet snacks (Ragi, Jowar, Foxtail). Order combos, sweets and hots. Fast delivery from Vizag." />
-  <meta name="keywords" content="millet snacks, ragi, jowar, foxtail, healthy snacks, Vizag, Millet Bites" />
-  <meta name="author" content="Millet Bites" />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Millet Bites — Healthy Millet Snacks" />
-  <meta property="og:description" content="Healthy, tasty & affordable millet snacks from Vizag — order via WhatsApp." />
-  <meta property="og:image" content="bites.png" />
-  <meta property="og:type" content="website" />
-
-  <!-- Structured data -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FoodEstablishment",
-    "name":"Millet Bites",
-    "url":"https://yourdomain.example",
-    "image":"https://yourdomain.example/bites.png",
-    "description":"Healthy millet snacks — Ragi, Jowar, Foxtail. Order combos, sweets and hots.",
-    "telephone":"+919949840365",
-    "address": { "@type": "PostalAddress", "addressLocality": "Visakhapatnam", "addressRegion": "Andhra Pradesh", "addressCountry": "IN" }
-  }
-  </script>
-
-  <link rel="icon" href="bites.png" />
-
-  <style>
-    :root{
-      --green:#2e7d32;
-      --accent:#e07b39;
-      --muted:#666;
-      --bg:#fdfdfd;
-    }
-    html{scroll-padding-top:80px}
-    body{
-      margin:0;font-family:Inter, 'Segoe UI', system-ui, -apple-system, Roboto, "Helvetica Neue", Arial;
-      background:var(--bg);color:#222;line-height:1.5;
-      -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
-    }
-
-    /* Header */
-    header{
-      position:sticky;top:0;z-index:1200;background:var(--green);color:#fff;
-      display:flex;align-items:center;justify-content:space-between;padding:14px 18px;
-      box-shadow:0 4px 8px rgba(0,0,0,0.08);
-    }
-    .brand{
-      display:flex;align-items:center;gap:10px;
-    }
-    .brand img{width:36px;height:36px;border-radius:6px;object-fit:cover}
-    .brand h1{margin:0;font-size:1.2rem;font-weight:700}
-    nav{display:flex;gap:12px;align-items:center}
-    nav a{color:#fff;text-decoration:none;font-weight:600}
-    .header-actions{display:flex;align-items:center;gap:12px}
-
-    /* Hamburger */
-    .hamburger{
-      display:none;background:transparent;border:0;color:#fff;font-size:22px;padding:6px;cursor:pointer;
-    }
-
-    /* Scrolling announcement */
-    .scroll{background:#f1f8e9;color:#2e7d32;padding:8px 12px;overflow:hidden;white-space:nowrap}
-    .scroll span{display:inline-block;padding-left:100%;animation:scroll-left 18s linear infinite}
-    @keyframes scroll-left{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
-
-    /* Hero / slideshow */
-    .hero{padding:18px 12px;text-align:center;background:#e8f5e9}
-    .slideshow{max-width:860px;margin:0 auto;border-radius:12px;overflow:hidden;position:relative}
-    .slideshow img{width:100%;height:300px;object-fit:cover;display:block;lazy:load}
-    .dot-row{display:flex;gap:8px;justify-content:center;margin-top:10px}
-
-    /* Grid */
-    .menu{padding:18px}
-    h2.center{text-align:center;color:var(--green);margin-bottom:18px}
-    .product-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));max-width:1200px;margin:0 auto}
-    .product-card{background:#fff;border-radius:12px;padding:10px;box-shadow:0 6px 18px rgba(0,0,0,0.06);display:flex;flex-direction:column;align-items:stretch;transition:transform .18s}
-    .product-card:hover{transform:translateY(-6px)}
-    .product-card img{width:100%;height:160px;object-fit:cover;border-radius:8px}
-    .product-info{padding:8px 4px 4px;flex:1;display:flex;flex-direction:column;gap:6px}
-    .product-info h4{margin:0;font-size:1.05rem;color:#333}
-    .product-info p.price{margin:0;font-weight:700;color:var(--accent)}
-    .controls{display:flex;gap:8px;align-items:center;margin-top:auto}
-    .controls select{padding:6px;border-radius:8px;border:1px solid #eee;font-weight:600}
-    .btn{padding:8px 12px;border-radius:8px;border:0;cursor:pointer;font-weight:700}
-    .btn-add{background:var(--accent);color:#fff}
-    .btn-view{background:#eee;color:#333}
-
-    /* Cart UI */
-    .floating-cart{
-      position:fixed;right:18px;bottom:18px;background:var(--green);color:#fff;border-radius:999px;padding:12px 14px;display:flex;gap:10px;align-items:center;box-shadow:0 12px 32px rgba(0,0,0,0.18);z-index:1300;cursor:pointer;
-      transition:transform .12s ease;
-    }
-    .floating-cart:hover{transform:scale(1.03)}
-    .cart-count{background:#ff5722;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-weight:800}
-    .cart-panel{position:fixed;right:0;top:0;width:360px;height:100%;background:#fffaf4;box-shadow:-6px 0 30px rgba(0,0,0,0.2);transform:translateX(110%);transition:transform .28s ease;z-index:1400;display:flex;flex-direction:column}
-    .cart-panel.active{transform:translateX(0)}
-    .cart-panel header{display:flex;justify-content:space-between;align-items:center;padding:14px;border-bottom:1px solid rgba(0,0,0,0.06)}
-    .cart-items{padding:12px;flex:1;overflow:auto}
-    .cart-item{display:flex;gap:8px;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(0,0,0,0.04);padding:10px 0}
-    .cart-summary{padding:12px;border-top:1px solid rgba(0,0,0,0.06);text-align:right}
-    .cart-buttons{display:flex;gap:8px;flex-direction:column;padding:12px}
-    .cart-buttons .order{background:var(--green);color:#fff;padding:10px;border-radius:8px;border:0;font-weight:800}
-    .cart-buttons .clear{background:#bdbdbd;color:#fff;padding:10px;border-radius:8px;border:0;font-weight:700}
-
-    /* Accessibility small */
-    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-
-    /* Footer */
-    footer{background:linear-gradient(90deg,#006400,#228B22,#32CD32);color:#eee;padding:18px;text-align:center;margin-top:22px}
-
-    /* Responsive */
-    @media(max-width:780px){
-      .brand h1{display:none} /* hide brand text on mobile */
-      nav{display:none}
-      .hamburger{display:inline-block}
-      .floating-cart{right:12px;bottom:12px;padding:10px 12px}
-      .slideshow img{height:200px}
-      .cart-panel{width:92%}
-    }
-    @media(min-width:781px){
-      .hamburger{display:none}
-      .mobile-menu{display:none}
-    }
-
-    /* small animation for add-to-cart (cloned image) */
-    .flying{
-      position:fixed;z-index:9999;pointer-events:none;transition:transform .6s ease,opacity .6s ease;
-      will-change:transform,opacity;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="bites.png">
+  <title>Millet Bites</title>
 </head>
 <body>
-  <!-- Overlay for cart/menus -->
-  <div id="overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1350"></div>
-
-  <!-- Header -->
-  <header>
-    <div class="brand" aria-hidden="false">
-      <img src="bites.png" alt="Millet Bites logo" />
-      <h1>Millet Bites</h1>
+  <div class="overlay" id="overlay"></div>
+    <div class="cart-panel" id="cartPanel">
+    <div class="cart-panel-header">
+      <h3>Your Cart</h3>
+      <button class="close-cart" id="closeCart" aria-label="Close Cart">&times;</button>
     </div>
-
-    <div class="header-actions">
-      <nav aria-label="Primary" id="desktopNav">
+    <div class="cart-items" id="panel-cart-items">
+      <div class="empty-cart">Your cart is empty</div>
+    </div>
+    <div class="cart-summary"><p>Total: ₹0.00</p></div>
+    <div class="cart-buttons">
+      <button onclick="sendOrder()">Pay Now</button>
+      <button class="clear">Clear Cart</button>
+    </div>
+  </div>
+      
+  <header>
+    <a href="#home"><h1>Millet Bites</h1></a>
+    <div class="header-right">
+      <nav>
         <a href="#menu">Menu</a>
+        <a href="#about">About Us</a>
         <a href="#contact">Contact</a>
         <a href="#reviews">Reviews</a>
       </nav>
-
-      <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false">☰</button>
-
-      <div class="floating-cart" id="floatingCart" role="button" aria-label="Open cart" title="Open cart">
-        <div style="font-size:20px">🛒</div>
-        <div style="display:flex;flex-direction:column;align-items:flex-start">
-          <div style="font-weight:700;font-size:13px">Cart</div>
-          <div style="font-size:12px;color:#fff;opacity:.9">Open to checkout</div>
-        </div>
-        <div style="margin-left:10px" class="cart-count" id="floatingCount">0</div>
+      <div class="cart-icon" id="cartIcon">
+        🛒
+        <span class="cart-count" id="cartCount">0</span>
       </div>
     </div>
   </header>
+  <div class="scroll"><span>🎉Healthy Rakhi, Happy Rakhi – Celebrate with Nutritious Millets!🎉</span></div>
+<section id="home" class="hero">
+  <div class="slideshow-container">
+    <a href="#menu">
+    <img class="slides" src="b1.jpeg" alt="Combo 1" />
+    </a>
+    <a href="#menu">
+    <img class="slides" src="b2.jpeg" alt="Combo 2" />
+    </a>
+    <a href="#menu">
+    <img class="slides" src="b3.jpeg" alt="Combo 3" />
+    </a> 
+    <a href="#menu">
+    <img class="slides" src="b4.jpeg" alt="Combo 4" />
+    </a>
+    <div style="text-align: center; margin-top: 10px;">
+      <span class="dot" data-index="1"></span>
+      <span class="dot" data-index="2"></span>
+      <span class="dot" data-index="3"></span>
+      <span class="dot" data-index="4"></span>
+    </div>
+  </div>
+  <div class="slide-text">
+    <h4>Welcome to Millet Bites – Experience delicious flavour with our healthy, tasty, and affordable millet-based snacks!</h4>
+    <p>Healthy | Tasty | Affordable</p>
+  </div>
+</section>
 
-  <div class="scroll" aria-hidden="true"><span>🎉 Healthy Rakhi offers — Celebrate with Millet Bites! 🎉</span></div>
+<section id="menu" class="menu">
+  <!-- Cart Icon -->
+  <div class="cart-icon" id="cartIcon2" style="text-align: right; font-weight: bold; padding: 10px 10px;">
+      🛒Cart
+      <span class="cart-count" id="cartCount2">0</span>
+  </div>
+  <h2>Our Menu</h2>
+  <div class="product-grid" id="category-grid"></div>
+  <div class="product-grid" id="product-grid" style="margin-top: 30px;"></div>
+</section>
 
-  <!-- Mobile menu (hidden on desktop) -->
-  <div id="mobileMenu" class="mobile-menu" style="display:none;position:fixed;top:62px;right:12px;background:#ffffff;border-radius:12px;padding:12px;box-shadow:0 12px 40px rgba(0,0,0,.18);z-index:1400">
-    <a href="#menu" style="display:block;padding:10px 6px;color:#333;font-weight:700">Products</a>
-    <a href="#contact" style="display:block;padding:10px 6px;color:#333;font-weight:700">Contact</a>
+  <section id="about" class="about-contact">
+    <h2>About Us</h2>
+    <p>We're a Vizag-based brand bringing healthy snacking to your doorstep.</p>
+  </section>
+
+  <section id="contact" class="about-contact" style="background: #e3f2fd;">
+    <h2>Contact Us</h2>
+    <p>Reach us on:</p>
+    <div class="contact-icons">
+      <div style="display: flex; justify-content: center; gap: 20px;">
+        <a href="https://wa.me/919949840365" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" style="height: 30px; width: 30px;">
+        </a>
+        <a href="https://instagram.com/vizagMilletBites" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram" style="height: 30px; width: 30px;">
+        </a>
+        <a href="tel:+919949840365" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="Phone" style="height: 30px; width: 30px;">
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews" class="about-contact" style="background: #fff8e1;">
+    <h2>Customer Reviews</h2>
+    <p>“Absolutely loved the Ragi Mixture—crunchy and wholesome!”</p>
+    <p>“Fast delivery, fresh taste. Will order again.”</p>
+  </section>
+
+  <footer>
+<div class="footer-container">
+<div class="footer-column">
+<img src="bites.png" alt="Millet Bites Logo" class="footer-logo" />
+<p>Experience delicious flavour with our healthy, tasty, and affordable millet-based snacks</p>
+</div>
+
+  <div class="footer-column">
+    <h2>Quick Links</h2>
+      <a href="#home">Home</a><br>
+      <a href="#about">About Us</a><br>
+      <a href="#menu">Menu</a><br>
+      <a href="#contact">Contact</a><br>
+      <a href="#reviews">Reviews</a><br>
   </div>
 
-  <!-- Hero / Slideshow -->
-  <section id="home" class="hero" aria-label="Welcome">
-    <div class="slideshow" role="region" aria-roledescription="carousel" aria-label="Showcase">
-      <img class="slide" src="b1.jpeg" alt="Combo 1" loading="lazy" />
-      <img class="slide" src="b2.jpeg" alt="Combo 2" loading="lazy" style="display:none" />
-      <img class="slide" src="b3.jpeg" alt="Combo 3" loading="lazy" style="display:none" />
-      <img class="slide" src="b4.jpeg" alt="Combo 4" loading="lazy" style="display:none" />
-      <div class="dot-row" aria-hidden="true">
-        <span class="dot" data-i="0" style="width:10px;height:10px;background:#bbb;border-radius:50%;display:inline-block"></span>
-        <span class="dot" data-i="1" style="width:10px;height:10px;background:#bbb;border-radius:50%;display:inline-block"></span>
-        <span class="dot" data-i="2" style="width:10px;height:10px;background:#bbb;border-radius:50%;display:inline-block"></span>
-        <span class="dot" data-i="3" style="width:10px;height:10px;background:#bbb;border-radius:50%;display:inline-block"></span>
-      </div>
-    </div>
-    <div class="slide-text" style="margin-top:12px">
-      <h2 style="margin:0;color:var(--green)">Welcome to Millet Bites</h2>
-      <p style="margin:6px 0 0;font-weight:700;color:var(--muted)">Healthy | Tasty | Affordable — order via WhatsApp</p>
-    </div>
-  </section>
+  <div class="footer-column">
+    <h2>Products</h2>
+      <a href="#menu">Combos</a><br>
+      <a href="#menu">Sweets</a><br>
+      <a href="#menu">Hots</a><br>
+      <a href="#menu">Dry Fruits</a><br>
+      <a href="#menu">Laddus</a><br>
+  </div>
+</div>
 
-  <!-- Menu/products -->
-  <section id="menu" class="menu" aria-label="Products">
-    <h2 class="center">Our Menu</h2>
-    <div id="categoryWrap" style="max-width:1200px;margin:0 auto;padding:8px;display:flex;gap:10px;justify-content:flex-end">
-      <!-- Buttons for filters (created dynamically) -->
-    </div>
-
-    <div class="product-grid" id="productGrid" aria-live="polite"></div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="about-contact" style="background:#e3f2fd;padding:18px" aria-label="Contact">
-    <h2 style="text-align:center;margin:0;color:var(--green)">Contact Us</h2>
-    <p style="text-align:center;margin:8px 0 0">WhatsApp / Call: <strong>+91 99498 40365</strong></p>
-    <div style="text-align:center;margin-top:10px">
-      <a href="https://wa.me/919949840365" target="_blank" rel="noopener" aria-label="WhatsApp Millet Bites">💬 WhatsApp</a>
-      <span style="margin:0 8px"> · </span>
-      <a href="https://instagram.com/vizagMilletBites" target="_blank" rel="noopener">📸 Instagram</a>
-    </div>
-  </section>
-
-  <!-- Reviews -->
-  <section id="reviews" style="padding:18px">
-    <h2 style="text-align:center;color:var(--green)">Customer Reviews</h2>
-    <div style="max-width:900px;margin:12px auto;text-align:center">
-      <blockquote style="font-style:italic;color:#444">“Absolutely loved the Ragi Mixture—crunchy and wholesome!”</blockquote>
-      <blockquote style="font-style:italic;color:#444">“Fast delivery, fresh taste. Will order again.”</blockquote>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div style="max-width:1100px;margin:0 auto;display:flex;gap:20px;flex-wrap:wrap;align-items:center;justify-content:center">
-      <div><img src="bites.png" alt="Millet Bites" style="width:86px;height:86px;border-radius:8px"></div>
-      <div style="max-width:600px;text-align:left;color:#fff">Experience delicious flavour with our healthy, tasty and affordable millet-based snacks. Shipping across India.</div>
-    </div>
-    <div style="margin-top:12px;font-size:13px;color:#fff">© 2025 Millet Bites. All rights reserved.</div>
+    &copy; 2025 Millet Bites. All rights reserved.
   </footer>
-
-  <!-- Cart panel -->
-  <aside id="cartPanel" class="cart-panel" aria-hidden="true" aria-label="Shopping cart">
-    <header>
-      <div style="display:flex;gap:10px;align-items:center">
-        <div style="font-size:18px;font-weight:800">🛒 Your Cart</div>
-        <div style="color:#777">(<span id="cartItemsCount">0</span> items)</div>
-      </div>
-      <button id="closeCartBtn" aria-label="Close cart" style="background:transparent;border:0;font-size:20px;color:var(--green)">✕</button>
-    </header>
-    <div class="cart-items" id="cartItemsArea">
-      <div style="padding:12px;color:#777;font-style:italic">Your cart is empty</div>
-    </div>
-    <div class="cart-summary" id="cartTotalArea">Total: ₹0.00</div>
-    <div class="cart-buttons">
-      <button class="order" id="orderNowBtn" aria-label="Order now">Order Now via WhatsApp</button>
-      <button class="clear" id="clearCartBtn" aria-label="Clear cart">Clear Cart</button>
-    </div>
-  </aside>
-
-  <!-- Floating quick order on mobile: just opens WhatsApp with the cart -->
-  <a id="quickWhatsApp" href="https://wa.me/919949840365" style="display:none" aria-hidden="true"></a>
-
+  <a href="https://wa.me/919949840365" class="whatsapp-float" target="_blank">💬</a>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
 <script>
-/* ===========================
-   Data & configuration
-   =========================== */
-const WHATSAPP_NUMBER = '919949840365'; // no + sign in wa.me URL format
-// product list (same as your original, improved data structure)
-const products = [
-  { name:"Combo Pack 1", image:"b1.jpeg", price:999, type:"combo", category:"combo", description:"Combo of popular snacks" },
-  { name:"Combo Pack 2", image:"b2.jpeg", price:299, type:"combo", category:"combo", description:"Great value pack" },
-  { name:"Combo Pack 3", image:"b3.jpeg", price:399, type:"combo", category:"combo", description:"Family favorite" },
-  { name:"Combo Pack 4", image:"b4.jpeg", price:599, type:"combo", category:"combo", description:"Special combo" },
-
-  { name:"Ragi Mixture", image:"Ragi Mixture.jpeg", price:60, type:"weight", category:"hots", description:"Crispy ragi mixture", minQty:100, pricePer:100 },
-  { name:"Ragi Chegodilu", image:"Ragi Chegodilu.jpeg", price:60, type:"weight", category:"hots", description:"Traditional chegodilu", minQty:100, pricePer:100 },
-  { name:"Ragi Murukkulu", image:"Ragi Murukkulu.jpeg", price:60, type:"weight", category:"hots", description:"Crunchy murukkulu", minQty:100, pricePer:100 },
-  { name:"Jowar Mixture", image:"Jowar Mixture.jpeg", price:60, type:"weight", category:"hots", description:"Light jowar snack", minQty:100, pricePer:100 },
-  { name:"Jowar Murukkulu", image:"Jowar Murukkulu.jpeg", price:60, type:"weight", category:"hots", description:"Savoury murukkulu", minQty:100, pricePer:100 },
-  { name:"Jowar Ribbon Pakodi", image:"Jowar Ribbon Pakodi.jpeg", price:60, type:"weight", category:"hots", description:"Ribbon pakodi", minQty:100, pricePer:100 },
-  { name:"Foxtail Sev", image:"Foxtail Sev.jpeg", price:60, type:"weight", category:"hots", description:"Foxtail millet sev", minQty:100, pricePer:100 },
-  { name:"Arikalu Jantikalu", image:"Arikalu Jantikalu.jpeg", price:60, type:"weight", category:"hots", description:"Crunchy arikalu", minQty:100, pricePer:100 },
-  { name:"Samalu Boondi", image:"Samalu Boondi.jpeg", price:60, type:"weight", category:"hots", description:"Samalu boondi", minQty:100, pricePer:100 },
-
-  { name:"Dry Fruit Mixture", image:"Dry Fruit Mixture.jpeg", price:180, type:"weight", category:"dryfruits", description:"Nuts & more", minQty:100, pricePer:100 },
-  { name:"Dry Fruit Laddu", image:"Dry Fruit Laddu.jpeg", price:300, type:"weight", category:"sweets", description:"Premium laddu", minQty:250, pricePer:250 },
-  { name:"Cashew Bar", image:"Cashew Bar.jpeg", price:200, type:"weight", category:"dryfruits", description:"Rich cashew bar", minQty:170, pricePer:170 },
-  { name:"Panchadara Gavvalu", image:"Panchadara Gavvalu.jpg", price:100, type:"weight", category:"sweets", description:"Sweet gavvalu", minQty:250, pricePer:250 },
-  { name:"Bellam Gavvalu", image:"Bellam Gavvalu.jpeg", price:100, type:"weight", category:"sweets", description:"Traditional bellam", minQty:250, pricePer:250 },
-  { name:"Hot Gavvalu", image:"Hot Gavvalu.jpeg", price:100, type:"weight", category:"hots", description:"Spicy gavvalu", minQty:250, pricePer:250 }
-];
-
-// cart stored as { productName: { product, qty } }
-// qty units: for 'combo' it's number of packs; for 'weight' it's grams
-let cart = {};
-
-// localStorage keys
-const CART_KEY = 'milletbites_cart_v1';
-
-/* ===========================
-   Utilities
-   =========================== */
-function saveCart(){
-  localStorage.setItem(CART_KEY, JSON.stringify(cart));
-}
-function loadCart(){
-  try{
-    const raw = localStorage.getItem(CART_KEY);
-    cart = raw ? JSON.parse(raw) : {};
-  }catch(e){ cart = {} }
-}
-function formatQty(product, qty){
-  if(product.type === 'combo') return `${qty} Pack${qty>1?'s':''}`;
-  return qty >= 1000 ? `${(qty/1000).toFixed(2)} kg` : `${qty} g`;
-}
-function calcItemTotal(item){
-  const p = item.product;
-  if(p.type === 'combo') return item.qty * p.price;
-  // weight product: base price is price per pricePer (100g or 250g or 170g)
-  const per = p.pricePer || 100;
-  return (item.qty / per) * p.price;
-}
-function calcCartTotal(){
-  let t = 0;
-  for(const key in cart) t += calcItemTotal(cart[key]);
-  return t;
-}
-function cartCountDistinct(){ return Object.keys(cart).length; }
-function cartItemsCount(){ // sum of units for display (distinct choice)
-  let c=0; for(const k in cart) c += 1; return c;
-}
-
-/* ===========================
-   Rendering
-   =========================== */
-const productGrid = document.getElementById('productGrid');
-const categoryWrap = document.getElementById('categoryWrap');
-
-function renderCategories(){
-  // create simple filter buttons: All, combo, hots, sweets, dryfruits
-  const cats = ['all', ...new Set(products.map(p=>p.category))];
-  categoryWrap.innerHTML = '';
-  cats.forEach(c=>{
-    const btn = document.createElement('button');
-    btn.className = 'btn';
-    btn.textContent = c==='all' ? 'All Products' : c.charAt(0).toUpperCase() + c.slice(1);
-    btn.style.background = c==='all' ? '#eee' : '#fff';
-    btn.style.border = '1px solid #eee';
-    btn.style.padding = '8px 10px';
-    btn.addEventListener('click', ()=>renderProducts(c));
-    categoryWrap.appendChild(btn);
-  });
-}
-
-function renderProducts(category='all'){
-  productGrid.innerHTML = '';
-  const filtered = category === 'all' ? products : products.filter(p => p.category === category);
-  filtered.forEach(p=>{
-    const card = document.createElement('div'); card.className='product-card';
-    card.innerHTML = `
-      <img src="${p.image}" alt="${p.name}" loading="lazy" />
-      <div class="product-info">
-        <h4>${p.name}</h4>
-        <p style="margin:0;color:#666">${p.description || ''}</p>
-        <p class="price">₹${p.price} ${p.type === 'combo' ? '- pack' : `- ${p.minQty || 100}g`}</p>
-        <div class="controls">
-          <button class="btn btn-view" data-action="decrease" aria-label="Decrease quantity">−</button>
-          <select aria-label="Quantity select" class="qty-select"></select>
-          <button class="btn btn-add" data-action="add" aria-label="Add to cart">Add</button>
-        </div>
-        <div style="margin-top:8px;color:#666;font-size:13px" class="status" aria-live="polite"></div>
-      </div>
-    `;
-    // populate select options based on type
-    const select = card.querySelector('.qty-select');
-    if(p.type === 'combo'){
-      [1,2,3,5].forEach(v=>{
-        const opt = document.createElement('option'); opt.value = v; opt.textContent = v + (v>1?' Packs':' Pack');
-        select.appendChild(opt);
-      });
-    } else {
-      // weight options: if minQty 250 then step 250 else 100
-      const step = p.minQty === 250 ? 250 : (p.minQty || 100);
-      const opts = step === 170 ? [170,250,500,1000] : [step, step*2, 500, 1000];
-      opts.forEach(v=>{
-        const opt = document.createElement('option'); opt.value = v; opt.textContent = v >= 1000 ? (v/1000)+' kg' : v+' g';
-        select.appendChild(opt);
-      });
-    }
-    // events
-    const addBtn = card.querySelector('[data-action="add"]');
-    addBtn.addEventListener('click',(e)=>{
-      const qty = parseInt(select.value,10);
-      addToCart(p.name, qty);
-      doAddAnimation(card.querySelector('img'));
-    });
-    const decBtn = card.querySelector('[data-action="decrease"]');
-    decBtn.addEventListener('click',()=>{
-      const qty = parseInt(select.value,10);
-      removeFromCart(p.name, qty);
-    });
-
-    productGrid.appendChild(card);
-    updateProductStatus(p.name);
-  });
-}
-
-/* ===========================
-   Cart operations
-   =========================== */
-function addToCart(productName, qty){
-  const product = products.find(p=>p.name===productName);
-  if(!product) return;
-  if(!cart[productName]) cart[productName] = { product, qty: 0 };
-  // units: combo-> pack count, weight-> grams
-  cart[productName].qty += qty;
-  // ensure minimums for special minQty: if product has minQty and qty is less than that, set to minQty
-  if(product.minQty && cart[productName].qty < product.minQty) cart[productName].qty = product.minQty;
-  saveCart(); updateAllDisplays();
-}
-function removeFromCart(productName, qty){
-  if(!cart[productName]) return;
-  cart[productName].qty -= qty;
-  if(cart[productName].qty <= 0) delete cart[productName];
-  saveCart(); updateAllDisplays();
-}
-function setCartItem(productName, qty){
-  if(qty <= 0){ delete cart[productName]; } else { cart[productName] = { product: products.find(p=>p.name===productName), qty }; }
-  saveCart(); updateAllDisplays();
-}
-function clearCart(){
-  cart = {}; saveCart(); updateAllDisplays();
-}
-
-/* ===========================
-   Update UI displays
-   =========================== */
-const floatingCount = document.getElementById('floatingCount');
-const cartItemsCountEl = document.getElementById('cartItemsCount');
-const cartItemsArea = document.getElementById('cartItemsArea');
-const cartTotalArea = document.getElementById('cartTotalArea');
-
-function updateAllDisplays(){
-  // cart count
-  const distinct = cartCountDistinct();
-  floatingCount.textContent = distinct;
-  cartItemsCountEl.textContent = Object.keys(cart).length;
-
-  // update product cards status
-  for(const p of products) updateProductStatus(p.name);
-
-  // update cart panel content
-  if(Object.keys(cart).length === 0){
-    cartItemsArea.innerHTML = `<div style="padding:12px;color:#777;font-style:italic">Your cart is empty</div>`;
-    cartTotalArea.textContent = 'Total: ₹0.00';
-  } else {
-    let html = '';
-    for(const key of Object.keys(cart)){
-      const item = cart[key];
-      const total = calcItemTotal(item);
-      html += `<div class="cart-item">
-        <div style="flex:1">
-          <div style="font-weight:700">${item.product.name}</div>
-          <div style="font-size:13px;color:#666">${formatQty(item.product,item.qty)}</div>
-        </div>
-        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
-          <div style="font-weight:800;color:${'var(--accent)'}">₹${total.toFixed(2)}</div>
-          <div style="display:flex;gap:6px;align-items:center">
-            <button style="padding:6px;border-radius:6px;border:0;background:#eee;cursor:pointer" data-action="decrease" data-name="${item.product.name}">−</button>
-            <button style="padding:6px;border-radius:6px;border:0;background:#eee;cursor:pointer" data-action="increase" data-name="${item.product.name}">+</button>
-            <button style="padding:6px;border-radius:6px;border:0;background:#f44336;color:#fff;cursor:pointer" data-action="remove" data-name="${item.product.name}">✕</button>
-          </div>
-        </div>
-      </div>`;
-    }
-    cartItemsArea.innerHTML = html;
-
-    // attach cart item button events
-    cartItemsArea.querySelectorAll('[data-action]').forEach(btn=>{
-      btn.addEventListener('click', (e)=>{
-        const act = e.currentTarget.getAttribute('data-action');
-        const name = e.currentTarget.getAttribute('data-name');
-        if(act === 'increase'){
-          // increase by package default (1 pack or minQty/100g)
-          const p = products.find(pp=>pp.name===name);
-          const inc = p.type === 'combo' ? 1 : (p.minQty || 100);
-          addToCart(name, inc);
-        } else if(act === 'decrease'){
-          const p = products.find(pp=>pp.name===name);
-          const dec = p.type === 'combo' ? 1 : (p.minQty || 100);
-          removeFromCart(name, dec);
-        } else if(act === 'remove'){
-          delete cart[name]; saveCart(); updateAllDisplays();
-        }
-      });
-    });
-
-    cartTotalArea.textContent = `Total: ₹${calcCartTotal().toFixed(2)}`;
-  }
-}
-
-// update status near product card (In cart: ...)
-function updateProductStatus(productName){
-  // find product card in DOM
-  const cards = [...document.querySelectorAll('.product-card')];
-  cards.forEach(card=>{
-    const title = card.querySelector('.product-info h4');
-    if(!title) return;
-    if(title.textContent === productName){
-      const st = card.querySelector('.status');
-      if(cart[productName]){
-        st.textContent = `In cart: ${formatQty(cart[productName].product, cart[productName].qty)}`;
-      } else st.textContent = '';
-    }
-  });
-}
-
-/* ===========================
-   Cart panel toggle & events
-   =========================== */
-const floatingCart = document.getElementById('floatingCart');
-const cartPanel = document.getElementById('cartPanel');
-const overlay = document.getElementById('overlay');
-function openCart(){ cartPanel.classList.add('active'); overlay.style.display='block'; cartPanel.setAttribute('aria-hidden','false'); }
-function closeCart(){ cartPanel.classList.remove('active'); overlay.style.display='none'; cartPanel.setAttribute('aria-hidden','true'); }
-
-floatingCart.addEventListener('click', openCart);
-document.getElementById('closeCartBtn').addEventListener('click', closeCart);
-overlay.addEventListener('click', closeCart);
-
-/* ===========================
-   Order via WhatsApp
-   =========================== */
-document.getElementById('orderNowBtn').addEventListener('click', ()=> {
-  if(Object.keys(cart).length === 0){ alert('Your cart is empty!'); return; }
-  // build message
-  let msg = `Hello! I'd like to place an order from Millet Bites:%0A%0A`;
-  for(const k in cart){
-    const it = cart[k];
-    msg += `${encodeURIComponent(it.product.name)}: ${encodeURIComponent(formatQty(it.product,it.qty))}%0A`;
-  }
-  msg += `%0ATotal: ₹${calcCartTotal().toFixed(2)}%0A%0APlease confirm.`;
-  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
-  window.open(url,'_blank');
-});
-
-/* Quick clear */
-document.getElementById('clearCartBtn').addEventListener('click', ()=> {
-  if(confirm('Clear cart?')) { clearCart(); closeCart(); }
-});
-
-/* Persist load */
-loadCart();
-renderCategories();
-renderProducts('all');
-updateAllDisplays();
-
-/* ===========================
-   Slideshow simple auto
-   =========================== */
-(function slideShow(){
-  const slides = document.querySelectorAll('.slide');
-  const dots = document.querySelectorAll('.dot');
-  let idx = 0;
-  function show(i){
-    slides.forEach((s,si)=> s.style.display = si===i ? 'block' : 'none');
-    dots.forEach((d,di)=> d.style.background = di===i ? '#2e7d32' : '#bbb');
-  }
-  show(idx);
-  dots.forEach(d=>d.addEventListener('click', ()=>{ idx = parseInt(d.dataset.i); show(idx); }));
-  setInterval(()=>{ idx = (idx+1) % slides.length; show(idx); }, 5000);
-})();
-
-/* ===========================
-   Hamburger menu (mobile)
-   =========================== */
-const hamburgerBtn = document.getElementById('hamburgerBtn');
-const mobileMenu = document.getElementById('mobileMenu');
-hamburgerBtn.addEventListener('click', ()=>{
-  const open = mobileMenu.style.display !== 'block';
-  mobileMenu.style.display = open ? 'block' : 'none';
-  hamburgerBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-});
-window.addEventListener('resize', ()=>{ if(window.innerWidth > 780){ mobileMenu.style.display='none'; hamburgerBtn.setAttribute('aria-expanded','false'); } });
-
-/* ===========================
-   Add-to-cart flying animation
-   =========================== */
-function doAddAnimation(imgEl){
-  if(!imgEl) return;
-  const rect = imgEl.getBoundingClientRect();
-  const fly = imgEl.cloneNode(true);
-  fly.className = 'flying';
-  fly.style.width = rect.width + 'px';
-  fly.style.height = rect.height + 'px';
-  fly.style.left = rect.left + 'px';
-  fly.style.top = rect.top + 'px';
-  fly.style.opacity = 0.95;
-  document.body.appendChild(fly);
-  const target = floatingCart.getBoundingClientRect();
-  // compute transform
-  const dx = target.left + target.width/2 - rect.left;
-  const dy = target.top + target.height/2 - rect.top;
-  requestAnimationFrame(()=>{
-    fly.style.transform = `translate(${dx}px, ${dy}px) scale(.12)`;
-    fly.style.opacity = '0.2';
-  });
-  setTimeout(()=>{ fly.remove(); pulseCart(); }, 700);
-}
-function pulseCart(){
-  floatingCart.style.transform = 'scale(1.08)';
-  setTimeout(()=> floatingCart.style.transform = '', 240);
-}
-
-/* ===========================
-   Accessibility helpers (keyboard)
-   =========================== */
-document.addEventListener('keydown', (e)=>{
-  if(e.key === 'Escape') { closeCart(); mobileMenu.style.display='none'; }
-});
-
-/* ===========================
-   Final small improvements
-   =========================== */
-// Show quick wa link on very small view to lead user directly if no JS cart
-function maybeShowQuickWhatsApp(){
-  if(window.innerWidth <= 480) {
-    document.getElementById('quickWhatsApp').style.display='inline';
-  }
-}
-maybeShowQuickWhatsApp();
-window.addEventListener('resize', maybeShowQuickWhatsApp);
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
 </script>
+
+<!-- Your external JavaScript -->
+<script src="script.js"></script>
 
 </body>
 </html>
