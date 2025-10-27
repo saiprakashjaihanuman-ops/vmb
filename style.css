@@ -53,13 +53,12 @@ header a:hover {
   color: #c8e6c9;
 }
 .nav-links {
-  color: black;
   display: flex;
   gap: 20px;
 }
 
 .nav-links a {
-  color: white;
+  color: black;
   margin: 0 12px;
   text-decoration: none;
   font-weight: 500;
