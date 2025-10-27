@@ -58,14 +58,15 @@ header a:hover {
 }
 
 .nav-links a {
+  color: white;
+  margin: 0 12px;
   text-decoration: none;
-  color: #4b2e05;
   font-weight: 500;
   transition: color 0.3s;
 }
 
 .nav-links a:hover {
-  color: #d17d00;
+  color: #c8e6c9;
 }
 
 /* Hamburger */
