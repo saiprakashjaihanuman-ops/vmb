@@ -579,30 +579,25 @@ footer a:hover {
 
 /* ✅ Responsive Additions */
 
+/* --- Large Desktops --- */
 @media (min-width: 1200px) {
-  .grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+  .grid,
   .product-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
-@media (max-width: 1024px) and (min-width: 769px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+/* --- Tablets & Small Laptops --- */
+@media (max-width: 1199px) and (min-width: 769px) {
+  .grid,
   .product-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
-}
-
-@media (max-width: 1024px) {
   header h1 {
     font-size: 1.5rem;
   }
   .slideshow-container {
-    max-width: 600px;
+    max-width: 700px;
   }
   .footer-container {
     flex-direction: column;
@@ -614,6 +609,7 @@ footer a:hover {
   }
 }
 
+/* --- Mobiles (≤768px) --- */
 @media (max-width: 768px) {
   header {
     flex-direction: column;
@@ -625,12 +621,12 @@ footer a:hover {
     margin-top: 10px;
     text-align: center;
   }
-  .grid {
-    grid-template-columns: 1fr;
-  }
+
+  .grid,
   .product-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
+
   .menu h2 {
     font-size: 1.6em;
   }
@@ -650,6 +646,7 @@ footer a:hover {
   }
 }
 
+/* --- Small Mobiles (≤480px) --- */
 @media (max-width: 480px) {
   header {
     padding: 10px 15px;
