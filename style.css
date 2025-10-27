@@ -70,17 +70,15 @@ header a:hover {
 }
 .discount-badge {
   position: absolute;
-  top: 10px;
-  left: -10px;
-  background: linear-gradient(135deg, #ff7043, #ffb74d);
+  top: 20px;
+  left: -40px;
+  background: #ff4c4c;
   color: white;
+  padding: 5px 50px;
+  transform: rotate(-45deg);
+  font-size: 12px;
   font-weight: 600;
-  font-size: 14px;
-  padding: 6px 18px;
-  border-radius: 0 6px 6px 0;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   z-index: 2;
 }
 
