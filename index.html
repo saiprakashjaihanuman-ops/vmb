@@ -9,23 +9,21 @@
 </head>
 <body>
   <div class="overlay" id="overlay"></div>
-  <div class="cart-panel" id="cartPanel">
+    <div class="cart-panel" id="cartPanel">
     <div class="cart-panel-header">
       <h3>Your Cart</h3>
-      <button class="close-cart" id="closeCart">&times;</button>
+      <button class="close-cart" id="closeCart" aria-label="Close Cart">&times;</button>
     </div>
     <div class="cart-items" id="panel-cart-items">
       <div class="empty-cart">Your cart is empty</div>
     </div>
-    <div class="cart-summary">
-      <p>Total: ₹0.00</p>
-    </div>
+    <div class="cart-summary"><p>Total: ₹0.00</p></div>
     <div class="cart-buttons">
-      <button class="order">Pay Now</button>
+      <button onclick="sendOrder()">Pay Now</button>
       <button class="clear">Clear Cart</button>
     </div>
   </div>
-
+      
   <header>
     <a href="#home"><h1>Millet Bites</h1></a>
     <div class="header-right">
