@@ -119,7 +119,7 @@ function renderProductsByCategory(category) {
 
     if (product.type === "combo") {
       div.innerHTML = `
-        <div class="discount-badge">${product.discount || ""}</div>
+        ${product.discount ? `<div class="discount-badge">${product.discount}</div>` : ""}
         <img src="${product.image}" alt="${product.name}" />
         <h4>${product.name}</h4>
         <p>₹${product.price} - pack</p>
@@ -152,7 +152,7 @@ function renderProductsByCategory(category) {
       ];
 
       div.innerHTML = `
-        <div class="discount-badge">${product.discount || ""}</div>
+        ${product.discount ? `<div class="discount-badge">${product.discount}</div>` : ""}
         <img src="${product.image}" alt="${product.name}" />
         <h4>${product.name}</h4>
         <p>₹${product.price} - ${product.minQty===250?'250g':'100g'}</p>
