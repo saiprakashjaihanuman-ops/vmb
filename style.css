@@ -1,4 +1,3 @@
-
 html {
   scroll-padding-top: 80px;
 }
@@ -652,49 +651,40 @@ footer a:hover {
 
 /* --- Mobiles (≤768px) --- */
 @media (max-width: 768px) {
+
+  /* ✅ Header: single line layout */
   header {
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: center;
-  }
-  nav {
-    width: 100%;
-    margin-top: 10px;
-    text-align: center;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    padding: 10px 15px;
   }
 
-  .grid,
-  .product-grid {
-    grid-template-columns: repeat(2, 1fr);
+  header h1 {
+    font-size: 1.3rem;
+    flex: 1;
   }
 
-  .menu h2 {
-    font-size: 1.6em;
+  /* Keep hamburger + cart in one line */
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
   }
-  .slideshow-container {
-    max-width: 90%;
-  }
-  .card img {
-    height: 160px;
-  }
-  .cart-panel {
-    width: 80%;
-  }
-  .footer-container {
-    flex-direction: column;
-    gap: 25px;
-    text-align: center;
-  }
-    .nav-links {
+
+  /* Hide normal nav links */
+  .nav-links {
     display: none;
     flex-direction: column;
     position: absolute;
-    top: 70px;
-    right: 20px;
-    background: #fff;
+    top: 60px;
+    right: 15px;
+    background: white;
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     padding: 15px;
     border-radius: 10px;
+    z-index: 999;
   }
 
   .nav-links.active {
@@ -713,8 +703,70 @@ footer a:hover {
     }
   }
 
+  /* Show hamburger on mobile */
   .hamburger {
     display: block;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: white;
+  }
+
+  nav {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Cart icon adjustments */
+  .cart-icon {
+    position: relative;
+    cursor: pointer;
+  }
+
+  .cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #ff5722;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  /* ✅ Other responsive elements */
+
+  .grid,
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .menu h2 {
+    font-size: 1.6em;
+  }
+
+  .slideshow-container {
+    max-width: 90%;
+  }
+
+  .card img {
+    height: 160px;
+  }
+
+  .cart-panel {
+    width: 80%;
+  }
+
+  .footer-container {
+    flex-direction: column;
+    gap: 25px;
+    text-align: center;
   }
 }
 
