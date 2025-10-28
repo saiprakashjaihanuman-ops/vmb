@@ -849,3 +849,18 @@ footer a:hover {
     font-size: 16px;
   }
 }
+
+.clumsy-image img {
+  /* Basic styling for the image */
+  max-width: 100%;
+  height: auto;
+
+  /* Apply a skewed transform */
+  transform: skew(-5deg, 5deg);
+  transition: transform 0.3s ease; /* Smooth transition for hover effects */
+}
+
+/* Add a hover effect for a more dynamic look */
+.clumsy-image:hover img {
+  transform: skew(10deg, -10deg) rotate(5deg);
+}
