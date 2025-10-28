@@ -48,27 +48,27 @@
     });
   
 const products = [
-  { name: "Combo Pack 1", image: "b1.jpeg", price: 999, type: "combo", category: "combo", discount: "25% OFF" },
-  { name: "Combo Pack 2", image: "b2.jpeg", price: 299, type: "combo", category: "combo", discount: "25% OFF" },
-  { name: "Combo Pack 3", image: "b3.jpeg", price: 399, type: "combo", category: "combo", discount: "25% OFF" },
-  { name: "Combo Pack 4", image: "b4.jpeg", price: 599, type: "combo", category: "combo", discount: "25% OFF" },
+  { name: "Combo Pack 1", image: "b1.jpeg", price: 999, type: "combo", category: ["combo"], discount: "25% OFF" },
+  { name: "Combo Pack 2", image: "b2.jpeg", price: 299, type: "combo", category: ["combo"], discount: "25% OFF" },
+  { name: "Combo Pack 3", image: "b3.jpeg", price: 399, type: "combo", category: ["combo"], discount: "25% OFF" },
+  { name: "Combo Pack 4", image: "b4.jpeg", price: 599, type: "combo", category: ["combo"], discount: "25% OFF" },
 
-  { name: "Ragi Mixture", image: "Ragi Mixture.jpeg", price: 60, type: "weight", category: "hots", discount: "15% OFF" },
-  { name: "Ragi Chegodilu", image: "Ragi Chegodilu.jpeg", price: 60, type: "weight", category: "hots",  discount: "15% OFF" },
-  { name: "Ragi Murukkulu", image: "Ragi Murukkulu.jpeg", price: 60, type: "weight", category: "hots",  discount: "15% OFF" },
-  { name: "Jowar Mixture", image: "Jowar Mixture.jpeg", price: 60, type: "weight", category: "hots",  discount: "15% OFF" },
-  { name: "Jowar Murukkulu", image: "Jowar Murukkulu.jpeg", price: 60, type: "weight", category: "hots",  discount: "15% OFF" },
-  { name: "Jowar Ribbon Pakodi", image: "Jowar Ribbon Pakodi.jpeg", price: 60, type: "weight", category: "hots",  discount: "15% OFF" },
-  { name: "Foxtail Sev", image: "Foxtail Sev.jpeg", price: 60, type: "weight", category: "hots",  discount: "New" },
-  { name: "Arikalu Jantikalu", image: "Arikalu Jantikalu.jpeg", price: 60, type: "weight", category: "hots",  discount: "15% OFF" },
-  { name: "Samalu Boondi", image: "Samalu Boondi.jpeg", price: 60, type: "weight", category: "hots",  discount: "15% OFF" },
+  { name: "Ragi Mixture", image: "Ragi Mixture.jpeg", price: 60, type: "weight", category: ["hots"], discount: "15% OFF" },
+  { name: "Ragi Chegodilu", image: "Ragi Chegodilu.jpeg", price: 60, type: "weight", category: ["hots"],  discount: "15% OFF" },
+  { name: "Ragi Murukkulu", image: "Ragi Murukkulu.jpeg", price: 60, type: "weight", category: ["hots"],  discount: "15% OFF" },
+  { name: "Jowar Mixture", image: "Jowar Mixture.jpeg", price: 60, type: "weight", category: ["hots"],  discount: "15% OFF" },
+  { name: "Jowar Murukkulu", image: "Jowar Murukkulu.jpeg", price: 60, type: "weight", category: ["hots"],  discount: "15% OFF" },
+  { name: "Jowar Ribbon Pakodi", image: "Jowar Ribbon Pakodi.jpeg", price: 60, type: "weight", category: ["hots"],  discount: "15% OFF" },
+  { name: "Foxtail Sev", image: "Foxtail Sev.jpeg", price: 60, type: "weight", category: ["hots"],  discount: "New" },
+  { name: "Arikalu Jantikalu", image: "Arikalu Jantikalu.jpeg", price: 60, type: "weight", category: ["hots"],  discount: "15% OFF" },
+  { name: "Samalu Boondi", image: "Samalu Boondi.jpeg", price: 60, type: "weight", category: ["hots"],  discount: "15% OFF" },
 
-  { name: "Dry Fruit Mixture", image: "Dry Fruit Mixture.jpeg", price: 180, type: "weight", category: "dryfruits" },
+  { name: "Dry Fruit Mixture", image: "Dry Fruit Mixture.jpeg", price: 180, type: "weight", category: ["dryfruits"] },
   { name: "Dry Fruit Laddu", image: "Dry Fruit Laddu.jpeg", price: 300, type: "weight", category: ["dryfruits", "sweets"], minQty: 250, pricePer: 250 },
-  { name: "Cashew Bar", image: "Cashew Bar.jpeg", price: 200, type: "weight", category: "dryfruits", minQty: 170, pricePer: 0 },
-  { name: "Panchadara Gavvalu", image: "Panchadara Gavvalu.jpg", price: 100, type: "weight", category: "sweets", minQty: 250, pricePer: 250 },
-  { name: "Bellam Gavvalu", image: "Bellam Gavvalu.jpeg", price: 100, type: "weight", category: "sweets", minQty: 250, pricePer: 250 },
-  { name: "Hot Gavvalu", image: "Hot Gavvalu.jpeg", price: 100, type: "weight", category: "hots", minQty: 250, pricePer: 250 }
+  { name: "Cashew Bar", image: "Cashew Bar.jpeg", price: 200, type: "weight", category: ["dryfruits"], minQty: 170, pricePer: 0 },
+  { name: "Panchadara Gavvalu", image: "Panchadara Gavvalu.jpg", price: 100, type: "weight", category: ["sweets"], minQty: 250, pricePer: 250 },
+  { name: "Bellam Gavvalu", image: "Bellam Gavvalu.jpeg", price: 100, type: "weight", category: ["sweets"], minQty: 250, pricePer: 250 },
+  { name: "Hot Gavvalu", image: "Hot Gavvalu.jpeg", price: 100, type: "weight", category: ["hots"], minQty: 250, pricePer: 250 }
 ];
 
 function showCategory(category) {
@@ -81,7 +81,12 @@ function showCategory(category) {
     const cart = {};
 
 // 1. Get unique categories from products
-const categories = [...new Set(products.map(p => p.category))];
+const categories = [
+  ...new Set(
+    products.flatMap(p => Array.isArray(p.category) ? p.category : [p.category])
+  )
+];
+
 
 function renderCategories() {
   const categoryGrid = document.getElementById("category-grid");
