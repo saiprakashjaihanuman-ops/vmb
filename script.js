@@ -122,7 +122,13 @@ function renderProductsByCategory(category) {
   const grid = document.getElementById("product-grid");
   grid.innerHTML = "";
 
-  const filtered = category === "all" ? products : products.filter(p => p.category === category);
+  const filtered = category === "all"
+  ? products
+  : products.filter(p => 
+      Array.isArray(p.category) 
+        ? p.category.includes(category) 
+        : p.category === category
+    );
 
   filtered.forEach(product => {
     const div = document.createElement("div");
