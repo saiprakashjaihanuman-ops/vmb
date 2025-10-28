@@ -850,6 +850,9 @@ footer a:hover {
   }
 }
 
+/* ============================
+   Customer Reviews Section
+============================ */
 .reviews-section {
   background: #fff8e1;
   padding: 60px 20px;
@@ -878,6 +881,12 @@ footer a:hover {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  aspect-ratio: 1 / 1; /* ✅ Keeps all cards square */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
 }
 
 .review-card:hover {
@@ -887,24 +896,17 @@ footer a:hover {
 
 .review-card img {
   width: 100%;
-  height: 180px;
-  object-fit: cover;
-  display: block;
-  border-bottom: 4px solid #ffcc80;
-  transition: opacity 0.3s ease;
+  height: 100%;
+  object-fit: contain; /* ✅ Shows full image, no cropping */
+  border-radius: 10px;
 }
 
-.review-card:hover img {
-  opacity: 0.9;
-}
-
-/* Mobile responsiveness */
+/* ✅ Responsive Adjustments */
 @media (max-width: 600px) {
   .reviews-section h2 {
     font-size: 1.6em;
   }
-
-  .review-card img {
-    height: 140px;
+  .review-card {
+    aspect-ratio: 1 / 1;
   }
 }
