@@ -64,7 +64,7 @@ const products = [
   { name: "Samalu Boondi", image: "Samalu Boondi.jpeg", price: 60, type: "weight", category: "hots",  discount: "15% OFF" },
 
   { name: "Dry Fruit Mixture", image: "Dry Fruit Mixture.jpeg", price: 180, type: "weight", category: "dryfruits" },
-  { name: "Dry Fruit Laddu", image: "Dry Fruit Laddu.jpeg", price: 300, type: "weight", category: "sweets", minQty: 250, pricePer: 250 },
+  { name: "Dry Fruit Laddu", image: "Dry Fruit Laddu.jpeg", price: 300, type: "weight", category: ["dryfruits", "sweets"], minQty: 250, pricePer: 250 },
   { name: "Cashew Bar", image: "Cashew Bar.jpeg", price: 200, type: "weight", category: "dryfruits", minQty: 170, pricePer: 0 },
   { name: "Panchadara Gavvalu", image: "Panchadara Gavvalu.jpg", price: 100, type: "weight", category: "sweets", minQty: 250, pricePer: 250 },
   { name: "Bellam Gavvalu", image: "Bellam Gavvalu.jpeg", price: 100, type: "weight", category: "sweets", minQty: 250, pricePer: 250 },
@@ -72,7 +72,9 @@ const products = [
 ];
 
 function showCategory(category) {
-  const filtered = products.filter(p => p.category === category);
+  const filtered = category === "all" 
+  ? products 
+  : products.filter(p => Array.isArray(p.category) ? p.category.includes(category) : p.category === category);
   renderFilteredProducts(filtered);
 }
 
@@ -95,7 +97,11 @@ allCard.addEventListener("click", () => renderProductsByCategory("all"));
 categoryGrid.appendChild(allCard);
 
   // Get unique categories
-  const categories = [...new Set(products.map(p => p.category))];
+  const categories = [
+  ...new Set(
+    products.flatMap(p => Array.isArray(p.category) ? p.category : [p.category])
+  )
+  ];
 
   categories.forEach(cat => {
     const div = document.createElement("div");
